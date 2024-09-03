@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>kitchensink</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="/css/screen.css" />
+</head>
+<body>
+<div id="container">
+    <div class="dualbrand">
+        <img src="/gfx/rhjb_eap_logo.png" width="300" height="175" />
+    </div>
+    <div id="content">
+        <!-- Define a block that child templates can override -->
+        <h1>Welcome to JBoss!</h1>
+
+        <div>
+            <p>You have successfully deployed a Jakarta EE Enterprise Application.</p>
+            <p><a th:href="@{/logout}" th:text="logout"></a> </p>
+        </div>
+
+        <form th:action="@{/members/admin/register}" method="post" th:object="${newMember}">
+            <h2>Member Registration</h2>
+            <p>Enforces annotation-based constraints defined on the model class.</p>
+
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" id="name" th:field="${newMember.name}" />
+                <span th:if="${#fields.hasErrors('name')}" class="invalid" th:text="${#fields.errors('name')}"></span>
+            </div>
+
+            <div>
+                <label for="email">Email:</label>
+                <input type="text" id="email" th:field="${newMember.email}" />
+                <span th:if="${#fields.hasErrors('email')}" class="invalid" th:text="${#fields.errors('email')}"></span>
+            </div>
+
+            <div>
+                <label for="phoneNumber">Phone #:</label>
+                <input type="text" id="phoneNumber" th:field="${newMember.phoneNumber}" />
+                <span th:if="${#fields.hasErrors('phoneNumber')}" class="invalid" th:text="${#fields.errors('phoneNumber')}"></span>
+            </div>
+
+            <div>
+                <button type="submit" class="register">Register</button>
+            </div>
+
+            <div th:if="${#fields.hasErrors()}" class="messages">
+                <p class="invalid" th:each="error : ${#fields.errors()}">
+                    <span th:text="${error}"></span>
+                </p>
+            </div>
+            <div th:if="${errorMessage}" class="messages">
+                <p class="invalid">Error: <span th:text="${errorMessage}">An error occurred</span></p>
+            </div>
+
+        </form>
+
+        <h2>Members</h2>
+        <div th:if="${members == null || members.isEmpty()}">
+            <em>No registered members.</em>
+        </div>
+
+        <table th:if="${members != null && !members.isEmpty()}" class="simpletablestyle">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone #</th>
+                <th>REST URL</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="member : ${members}">
+                <td th:text="${member.id}"></td>
+                <td th:text="${member.name}"></td>
+                <td th:text="${member.email}"></td>
+                <td th:text="${member.phoneNumber}"></td>
+                <td>
+                    <a th:href="@{/members/view/{id}(id=${member.id})}" th:text="here"></a>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="5">
+                    REST URL for all members: <a th:href="@{/members/view/all}" th:text="'View All'"></a>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div id="aside">
+        <p>Learn more about Red Hat JBoss Enterprise Application Platform.</p>
+        <ul>
+            <li><a href="https://access.redhat.com/documentation/en/red-hat-jboss-enterprise-application-platform/">Documentation</a></li>
+            <li><a href="http://www.redhat.com/en/technologies/jboss-middleware/application-platform">Product Information</a></li>
+        </ul>
+    </div>
+    <div id="footer">
+        <p>
+            This project was generated from a Maven archetype from
+            JBoss.<br />
+        </p>
+    </div>
+</div>
+</body>
+</html>

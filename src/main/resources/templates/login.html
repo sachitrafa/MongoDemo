@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>kitchensink</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="/css/screen.css" />
+</head>
+<body>
+<div id="container">
+    <div id="content" class="container">
+        <!-- Define a block that child templates can override -->
+        <h1>Welcome to JBoss!</h1>
+
+        <div>
+            <p>You have successfully deployed a Jakarta EE Enterprise Application.</p>
+        </div>
+
+        <form th:action="@{/login}" method="post">
+            <h2>User Login</h2>
+            <p>Enforces annotation-based constraints defined on the model class.</p>
+
+            <div>
+                <label for="username">Name:</label>
+                <input type="text" id="username" name="username" required="required" />
+            </div>
+
+            <div>
+                <label for="password">password:</label>
+                <input type="text" id="password" name="password" required="required"/>
+            </div>
+
+            <div>
+                <button type="submit" class="register">Submit</button>
+            </div>
+        </form>
+        <p>Don't have an account sign up!<a th:href="@{/register}" th:text="here"></a></p>
+    </div>
+    <div id="aside">
+        <p>Learn more about Red Hat JBoss Enterprise Application Platform.</p>
+        <ul>
+            <li><a href="https://access.redhat.com/documentation/en/red-hat-jboss-enterprise-application-platform/">Documentation</a></li>
+            <li><a href="http://www.redhat.com/en/technologies/jboss-middleware/application-platform">Product Information</a></li>
+        </ul>
+    </div>
+    <div id="footer">
+        <p>
+            This project was generated from a Maven archetype from
+            JBoss.<br />
+        </p>
+    </div>
+</div>
+</body>
+</html>
