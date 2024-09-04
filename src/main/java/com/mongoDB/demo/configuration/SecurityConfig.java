@@ -1,6 +1,7 @@
 package com.mongoDB.demo.configuration;
 
 
+import com.mongoDB.demo.exception.AccessDeniedExceptionHandler;
 import com.mongoDB.demo.service.impl.CustomUserDetailServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -41,7 +42,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public DefaultSecurityFilterChain securityWebFilterChain(HttpSecurity http) throws Exception {
+    public DefaultSecurityFilterChain securityWebFilterChain(HttpSecurity http, AccessDeniedExceptionHandler accessDeniedExceptionHandler) throws Exception {
         http.cors(r->r.disable())
         .csrf(r->r.disable())
                 .authorizeHttpRequests(r -> r
@@ -59,7 +60,7 @@ public class SecurityConfig {
                         .logoutSuccessUrl("/login?logout")
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID")
-                        .permitAll());
+                        .permitAll()).exceptionHandling(r -> r.accessDeniedHandler(accessDeniedExceptionHandler));
 
         return http.build();
     }
