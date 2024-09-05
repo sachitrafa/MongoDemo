@@ -4,14 +4,14 @@ Here’s a template for the `README.md` file of your MongoDemo project:
 
 # MongoDemo
 
-MongoDemo is a Spring Boot application designed to demonstrate [brief description of the project's purpose or functionality]. This project includes features such as [list any key features like authentication, role-based access control, encryption, etc.].
+MongoDemo is a Spring Boot application designed to demonstrate the migrated functionality of the legacy system. This project includes features such as role based authentication, Global Exception Handling etc.
 
 ## System Requirements
 
 To run this project, ensure you have the following installed:
 
 - **Java:** Version 21
-- **Gradle:** [Specify the version if needed, or mention the wrapper]
+- **Gradle:** 
 - **MongoDB:** Version 7.0.2
 - **Mongosh:** Version 2.2.3
 
