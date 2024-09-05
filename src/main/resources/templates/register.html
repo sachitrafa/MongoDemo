@@ -26,11 +26,13 @@
             <div>
                 <label for="username">Name:</label>
                 <input type="text" id="username" required="required" th:field="${user.userName}"/>
+                <span th:if="${#fields.hasErrors('userName')}" class="invalid" th:text="${#fields.errors('userName')}"></span>
             </div>
 
             <div>
                 <label for="password">password:</label>
                 <input type="text" id="password" required="required" th:field="${user.password}"/>
+                <span th:if="${#fields.hasErrors('password')}" class="invalid" th:text="${#fields.errors('password')}"></span>
             </div>
 
             <div>

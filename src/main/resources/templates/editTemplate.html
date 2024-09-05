@@ -15,35 +15,30 @@
         <!-- Define a block that child templates can override -->
         <h1>Welcome to JBoss!</h1>
 
-        <div>
-            <p>You have successfully deployed a Jakarta EE Enterprise Application.</p>
-            <p><a th:href="@{/logout}" th:text="logout"></a> </p>
-        </div>
-
-        <form th:action="@{/members/view/register}" method="post" th:object="${newMember}">
+        <form th:action="@{/members/admin/update/{id}(id=${member.id})}" method="post" th:object="${member}">
             <h2>Member Registration</h2>
             <p>Enforces annotation-based constraints defined on the model class.</p>
 
             <div>
                 <label for="name">Name:</label>
-                <input type="text" id="name" th:field="${newMember.name}" />
+                <input type="text" id="name" th:field="${member.name}" th:placeholder="${member.name}"/>
                 <span th:if="${#fields.hasErrors('name')}" class="invalid" th:text="${#fields.errors('name')}"></span>
             </div>
 
             <div>
                 <label for="email">Email:</label>
-                <input type="text" id="email" th:field="${newMember.email}" />
+                <input type="text" id="email" th:field="${member.email}" th:placeholder="${member.email}"/>
                 <span th:if="${#fields.hasErrors('email')}" class="invalid" th:text="${#fields.errors('email')}"></span>
             </div>
 
             <div>
                 <label for="phoneNumber">Phone #:</label>
-                <input type="text" id="phoneNumber" th:field="${newMember.phoneNumber}" />
+                <input type="text" id="phoneNumber" th:field="${member.phoneNumber}" th:placeholder="${member.phoneNumber}"/>
                 <span th:if="${#fields.hasErrors('phoneNumber')}" class="invalid" th:text="${#fields.errors('phoneNumber')}"></span>
             </div>
 
             <div>
-                <button type="submit" class="register">Register</button>
+                <button type="submit" class="register">Update</button>
             </div>
 
             <div th:if="${#fields.hasErrors()}" class="messages">
@@ -56,49 +51,6 @@
             </div>
 
         </form>
-
-        <h2>Members</h2>
-        <div th:if="${members == null || members.isEmpty()}">
-            <em>No registered members.</em>
-        </div>
-
-        <table th:if="${members != null && !members.isEmpty()}" class="simpletablestyle">
-            <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone #</th>
-                <th>REST URL</th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="member : ${members}">
-                <td th:text="${member.id}"></td>
-                <td th:text="${member.name}"></td>
-                <td th:text="${member.email}"></td>
-                <td th:text="${member.phoneNumber}"></td>
-                <td>
-                    <a th:href="@{/members/admin/{id}(id=${member.id})}" th:text="here"></a>
-                </td>
-                <td>
-                    <a th:href="@{/members/admin/edit/{id}(id=${member.id})}" th:text="here"></a>
-                </td>
-                <td>
-                    <a th:href="@{/members/admin/delete/{id}(id=${member.id})}" th:text="here"></a>
-                </td>
-            </tr>
-            </tbody>
-            <tfoot>
-            <tr>
-                <td colspan="5">
-                    REST URL for all members: <a th:href="@{/members/admin/all}" th:text="'View All'"></a>
-                </td>
-            </tr>
-            </tfoot>
-        </table>
     </div>
     <div id="aside">
         <p>Learn more about Red Hat JBoss Enterprise Application Platform.</p>

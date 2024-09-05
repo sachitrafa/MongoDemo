@@ -7,18 +7,12 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.util.List;
 
+public interface DeterministicEncryptionService {
 
-public interface RegisterUsersService {
+    String encrypt(String plainText) throws Exception;
 
-    void registerNewUsers(Member member) throws Exception;
+    String decrypt(String encryptedText) throws Exception;
 
-    List<Member> getUsers();
-
-    Member getUser(String id);
-
-    void editUser(Member member ,String id) throws Exception;
-
-    void deleteUser(String id);
+    Member decryptMember(Member member);
 }

@@ -33,5 +33,6 @@ public class Member implements Serializable {
     @Size(min = 10, max = 12)
     @Digits(fraction = 0, integer = 12)
     @Field(name = "phone_number")
+    @Indexed(unique = true)
     private String phoneNumber;
 }
